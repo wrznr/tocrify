@@ -16,7 +16,7 @@ setup(
     author='Kay-Michael Würzner, Matthias Boenig',
     author_email='wuerzner@bbaw.de, boenig@bbaw.de',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs')),
+    packages=find_packages(exclude=('tests', 'docs', 'samples')),
     package_data={'tocrify' : ['data/mets2hocr.yml']},
     install_requires=[
     ],

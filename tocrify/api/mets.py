@@ -4,6 +4,11 @@ from lxml import etree
 
 import os
 
+from .mets_generateds import (
+    parse,
+    parseString
+    )
+
 ns = {
      'mets': 'http://www.loc.gov/METS/',
      'xlink' : "http://www.w3.org/1999/xlink",
@@ -61,6 +66,7 @@ class Mets:
         The constructor.
         """
 
+        self.mets = None
         self.tree = None
         self.structMap_logical = None
         self.structMap_physical = None
@@ -94,8 +100,10 @@ class Mets:
         Reads in METS from a given file source.
         :param str path: Path to a METS document.
         """
-        self.tree = etree.parse(path)
-        self.__spur(self.tree)
+        print(path)
+        self.mets = parse(path, silence=True)
+        #self.tree = etree.parse(path)
+        #self.__spur(self.tree)
 
     def __spur(self, tree):
         """

@@ -2,3 +2,6 @@ click
 lxml
 python-Levenshtein
 pyyaml
+generateDS
+pytest
+pytest-subtests
