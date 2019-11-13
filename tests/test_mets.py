@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import io
 import pytest
 import warnings
 
@@ -41,6 +42,7 @@ def test_reading_local_file(datadir):
     f = open(datadir.join('test_mets.xml'))
     mets = Mets.read(f)
     assert(mets.mets is not None)
+    assert(mets.mods is not None)
 
 def test_loading_local_file(datadir):
     '''
@@ -49,6 +51,7 @@ def test_loading_local_file(datadir):
     f = open(datadir.join('test_mets.xml'))
     mets = Mets.fromfile(f)
     assert(mets.mets is not None)
+    assert(mets.mods is not None)
 
 def test_data_assignment(subtests, datadir):
     '''
@@ -58,4 +61,5 @@ def test_data_assignment(subtests, datadir):
     mets = Mets.read(f)
 
     with subtests.test("Check main title"):
-        assert(mets.get_main_title() == "Geschichte der Mission der evangelischen Brüder unter den Indianern in Nordamerika")
+            
+        assert(mets.mods.get_titleInfo()[0].get_title()[0].get_valueOf_() == "Geschichte der Mission der evangelischen Brüder unter den Indianern in Nordamerika")

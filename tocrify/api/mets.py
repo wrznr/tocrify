@@ -4,10 +4,8 @@ from lxml import etree
 
 import os
 
-from .mets_generateds import (
-    parse,
-    parseString
-    )
+from .mets_generateds import parse as parse_mets
+from .mods_generateds import parseString as parse_mods
 
 ns = {
      'mets': 'http://www.loc.gov/METS/',
@@ -67,6 +65,7 @@ class Mets:
         """
 
         self.mets = None
+        self.mods = None
         self.tree = None
         self.structMap_logical = None
         self.structMap_physical = None
@@ -101,7 +100,8 @@ class Mets:
         :param str path: Path to a METS document.
         """
         print(path)
-        self.mets = parse(path, silence=True)
+        self.mets = parse_mets(path, silence=True)
+        self.mods = parse_mods(self.mets.get_dmdSec()[0].get_mdWrap().get_xmlData().get_anytypeobjs_()[0])
         #self.tree = etree.parse(path)
         #self.__spur(self.tree)
 
